@@ -5,33 +5,55 @@ import java.util.List;
 
 public class AlienDictionary {
 	
-	List<Word> dizionario = new LinkedList<Word>();
-	
+	// List<Word> SOLUZIONE 1
+	List<WordEnhanced> dizionario = new LinkedList<WordEnhanced>();
+	                                      
+	                                  
    public void addWord(String alienWord, String translation) {
 	   
-	  Word p = new Word(alienWord, translation);
+	   //SOLUZIONE ESERCIZIO 1 
+	  /*Word p = new Word(alienWord, translation);
 	  
 	  for(Word d : dizionario) {
 		  if(d.getAlienWord().equals(alienWord)) {
 			  dizionario.remove(d);
-			  dizionario.add(p);
+			  dizionario.add(p);                     
 			  return;
 		  }
 	  }
 	  dizionario.add(p);
-	  return;
-   }
+	  return;*/
+	 
+	   //SOLUZIONE ESERCIZIO 2   
+	   WordEnhanced p = new WordEnhanced(alienWord);
+		if (dizionario.contains(p)) {
+			dizionario.get(dizionario.indexOf(p)).setTranslation(translation);
+			return;
+		}
+		p.setTranslation(translation);
+		dizionario.add(p);
+	 }
    
    public String translateWord(String alienWord) {
-	   for(Word d : dizionario) {
+	   
+	   //SOLUZIONE ESERCIZIO 1
+	   /* for(Word d : dizionario) {
 		   if(d.getAlienWord().equals(alienWord)) {
 			   return d.getTranslation();
 		   }
 	   }
-	   return null;
+	   return null; */
+	   
+	   //SOLUZIONE ESERCIZIO 2
+	   WordEnhanced w = new WordEnhanced(alienWord);
+		if (dizionario.contains(w)) {
+			return dizionario.get(dizionario.indexOf(w)).getTranslation();
+		}
+		return null;
+	   
    }
    
    public void resetDictionary(){
-		dizionario.clear();
+		dizionario.clear(); 
 	}
 }
